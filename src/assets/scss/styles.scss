@@ -1,0 +1,12 @@
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+
+@import "~node_modules/bootstrap/scss/functions";
+@import "~node_modules/bootstrap/scss/variables";
+@import "~node_modules/bootstrap/scss/mixins";
+
+@import "~node_modules/bootstrap/scss/grid";
+
+$bg-color: $gray-100;
+body {
+    background: $bg-color;
+}
