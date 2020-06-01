@@ -24,8 +24,15 @@ export class AuthService {
         return this._httpClient.post<IResponse<ICredentials>>(url, postData);
     }
 
-    setAuthorizedUser(user: any): void {
-        this.authorizedUser$.next(user);
+    setAuthorizedUser(creds: ICredentials): void {
+        localStorage.setItem('c_user', JSON.stringify(creds.user));
+        this.authorizedUser$.next(creds);
+    }
+
+    getAuthorizedUser() {
+      const user = localStorage.getItem('c_user');
+      //
+      return user ? JSON.parse(user) : false;
     }
 
     isAuthorized(): Observable<IResponse<any>> {

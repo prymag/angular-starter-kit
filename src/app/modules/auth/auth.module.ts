@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginFormComponent } from './components/login-form/login-form.component';
 import { LoginComponent } from './pages/login/login.component';
 import { CoreModule } from '@core/core.module';
-import { AuthRoutingModule } from './auth.routing.module';
+import { AuthRoutingModule } from './auth-routing.module';
 
 @NgModule({
   declarations: [LoginFormComponent, LoginComponent],

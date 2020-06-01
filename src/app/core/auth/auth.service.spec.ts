@@ -68,18 +68,36 @@ describe("AuthService", () => {
             }
         }
 
+        const spy = spyOn(localStorage, 'setItem').and.callFake(() => '');
+        
+
         authService.authorizedUser$.subscribe(credentials => {
             expect(credentials).toEqual(jasmine.objectContaining(mockCredentials));
             done();
         });
 
         authService.setAuthorizedUser(mockCredentials);
+        expect(spy).toHaveBeenCalledWith('c_user', JSON.stringify(mockCredentials.user));
+    });
+
+    it('Should get authorized user', () => {
+      //
+      const mockUser = {
+        firstname: 'bianca',
+        lastname: 'gonzales'
+    }
+
+      spyOn(localStorage, 'getItem').and.callFake(() => JSON.stringify(mockUser));
+
+      const result = authService.getAuthorizedUser();
+      
+      expect(result).toEqual(mockUser);
     });
 
     it('Should check if authorized', (done) => {
         //
         const mockResponse: IResponse<any> = {
-            success: false,
+            success: true,
             message: 'Success',
             data: {
                 token: 'abxcd.cdd.cd',

@@ -1,3 +1,5 @@
+import { IUser } from './user.interface';
+
 export interface ILogin {
     username: string
     password: string
@@ -5,8 +7,5 @@ export interface ILogin {
 
 export interface ICredentials {
     token: string,
-    user: {
-        firstname: string,
-        lastname: string
-    }
+    user: IUser
 }
