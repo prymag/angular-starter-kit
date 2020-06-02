@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { IFormSubmit } from '@core/interfaces/form-submit.interface';
-import { ILogin } from '@core/interfaces/auth.interface';
 import { AuthService } from '@core/auth/auth.service';
 import { Router } from '@angular/router';
+import { ILogin } from '../../interfaces/login.interface';
 
 
 
@@ -13,14 +13,21 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
 
-  testing = '';
-
   constructor(
     private _router: Router,
     private _authService: AuthService
   ) { }
 
   ngOnInit(): void {
+    this.redirectIfAuthenticated();
+  }
+
+  redirectIfAuthenticated() {
+    //
+    if (!this._authService.getAuthorizedUser()) {
+      //
+      this._router.navigate(['/']);
+    }
   }
 
   doLogin(formData: IFormSubmit<ILogin>) {

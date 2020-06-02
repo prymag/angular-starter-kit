@@ -1,0 +1,35 @@
+<form [formGroup]="theForm" (ngSubmit)="onSubmit()">
+
+  <mat-form-field appearance="standard">
+    <mat-label>Username</mat-label>
+    <input matInput placeholder="username" formControlName="username" autocomplete="none" >
+    <mat-error>{{ displayControlError('username') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Password</mat-label>
+    <input matInput placeholder="password" formControlName="password" autocomplete="none" >
+    <mat-error>{{ displayControlError('password') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Firstname</mat-label>
+    <input matInput placeholder="firstname" formControlName="firstname" autocomplete="none" >
+    <mat-error>{{ displayControlError('firstname') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Lastname</mat-label>
+    <input matInput placeholder="lastname" formControlName="lastname" autocomplete="none" >
+    <mat-error>{{ displayControlError('lastname') }}</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="standard">
+    <mat-label>Email</mat-label>
+    <input matInput placeholder="email" formControlName="email" >
+    <mat-error>{{ displayControlError('email') }}</mat-error>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary" class="btn-submit">Submit</button>
+
+</form>

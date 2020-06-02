@@ -4,7 +4,8 @@
 
 export const environment = {
   production: false,
-  API_URL: ''
+  API_URL: '',
+  MIN_PASSWORD_LENGTH: 6
 };
 
 /*

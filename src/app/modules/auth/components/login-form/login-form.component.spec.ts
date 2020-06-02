@@ -1,7 +1,5 @@
 import { async, ComponentFixture, TestBed, tick } from '@angular/core/testing';
-import { FormGroup } from '@angular/forms';
 import { LoginFormComponent } from './login-form.component';
-import { By } from '@angular/platform-browser';
 import { HarnessLoader } from '@angular/cdk/testing';
 import { TestbedHarnessEnvironment } from '@angular/cdk/testing/testbed';
 import { CoreModule } from '@core/core.module';
@@ -9,13 +7,12 @@ import { MatButtonHarness } from '@angular/material/button/testing';
 import { MatFormFieldHarness } from '@angular/material/form-field/testing';
 import { IFormSubmit } from '@core/interfaces/form-submit.interface';
 import { MatInputHarness } from '@angular/material/input/testing';
-import { ILogin } from '@core/interfaces/auth.interface';
-
+import { ILogin } from '../../interfaces/login.interface';
 
 describe('LoginFormComponent', () => {
   let component: LoginFormComponent;
   let fixture: ComponentFixture<LoginFormComponent>;
-  let loader: HarnessLoader
+  let loader: HarnessLoader;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({

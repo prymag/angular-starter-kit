@@ -3,7 +3,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoginComponent } from './login.component';
 import { AuthService } from '@core/auth/auth.service';
 import { IFormSubmit } from '@core/interfaces/form-submit.interface';
-import { ILogin, ICredentials } from '@core/interfaces/auth.interface';
+import { ICredentials } from '@core/interfaces/auth.interface';
 import { IResponse } from '@core/interfaces/response.interface';
 import { of } from 'rxjs';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -11,6 +11,7 @@ import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { Router } from '@angular/router';
 import { Component, Output, EventEmitter } from '@angular/core';
 import { By } from '@angular/platform-browser';
+import { ILogin } from '../../interfaces/login.interface';
 
 /**
  * Create a mock of the child component under test
@@ -56,7 +57,6 @@ describe('LoginComponent', () => {
     authService = fixture.debugElement.injector.get(AuthService);
     router = fixture.debugElement.injector.get(Router);
     mockLoginFormComponent = fixture.debugElement.query(By.directive(MockLoginFormComponent)).componentInstance;
-    fixture.detectChanges();
   });
 
   it('should create', () => {
@@ -65,6 +65,7 @@ describe('LoginComponent', () => {
 
   it('Should process successful login', () => {
     //
+    fixture.detectChanges();
 
     const mockResponse: IResponse<ICredentials> = {
       data: {
@@ -96,6 +97,15 @@ describe('LoginComponent', () => {
     
   });
 
-  //
+  it('Should redirect if user is authenticated', () => {
+    //
+    const spyGetAuthorizedUser = spyOn(authService, 'getAuthorizedUser').and.callFake(() => false);
+    const spyGetRouterNavigate = spyOn(router, 'navigate');
+
+    fixture.detectChanges();
+
+    expect(spyGetAuthorizedUser).toHaveBeenCalled();
+    expect(spyGetRouterNavigate).toHaveBeenCalledWith(['/']);
+  })
 
 });

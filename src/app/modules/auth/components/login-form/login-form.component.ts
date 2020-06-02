@@ -1,10 +1,10 @@
 import { Component, OnInit, EventEmitter, Output, Input, OnDestroy } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, FormControl, AbstractControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { IFormSubmit } from '@core/interfaces/form-submit.interface';
 import { FormHelper } from '@core/helpers/form/form.helper';
-import { ILogin } from '@core/interfaces/auth.interface';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
+import { ILogin } from '../../interfaces/login.interface';
 
 @Component({
   selector: 'app-login-form',

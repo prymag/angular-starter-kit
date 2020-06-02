@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment as env } from "@env/environment";
-import { ILogin, ICredentials } from '@core/interfaces/auth.interface';
+import { ICredentials } from '@core/interfaces/auth.interface';
 import { IResponse } from '@core/interfaces/response.interface';
-import { map } from 'rxjs/operators';
 import { Observable, Subject } from 'rxjs';
+import { ILogin } from 'src/app/modules/auth/interfaces/login.interface';
 
 @Injectable({
     providedIn: 'root'
