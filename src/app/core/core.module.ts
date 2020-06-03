@@ -6,9 +6,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
+import { BaseFormComponent } from './base-components/base-form/base-form.component';
 
 @NgModule({
-  declarations: [],
+  declarations: [BaseFormComponent],
   imports: [
     HttpClientModule,
     RouterModule,

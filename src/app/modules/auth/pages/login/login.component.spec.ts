@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 import { Component, Output, EventEmitter } from '@angular/core';
 import { By } from '@angular/platform-browser';
 import { ILogin } from '../../interfaces/login.interface';
+import { ToastrModule } from 'ngx-toastr';
+import { NotificationService } from '@core/services/notification.service';
+import { NoopAnimationsModule } from '@angular/platform-browser/animations';
 
 /**
  * Create a mock of the child component under test
@@ -20,22 +23,23 @@ import { ILogin } from '../../interfaces/login.interface';
  * it is important to note the selector being used,
  * it should match the child component selector we are mocking
  * 
- * the parent component `LoginComponent` listens for the `loginFormSubmit` event
+ * the parent component `LoginComponent` listens for the `eeFormSubmit` event
  * from the child component `LoginFormComponent` <app-login-form> 
  * this triggers the `doLogin` function of the parent component
- * hence, we need to implement the `loginFormSubmit` emitter on our mock
+ * hence, we need to implement the `eeFormSubmit` emitter on our mock
  */
 @Component({
   selector: 'app-login-form',
   template: '<p>Mock Login Form Component</p>'
 })
 class MockLoginFormComponent {
-  @Output() loginFormSubmit: EventEmitter<IFormSubmit<ILogin>> = new EventEmitter();
+  @Output() eeFormSubmit: EventEmitter<IFormSubmit<ILogin>> = new EventEmitter();
 }
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let authService: AuthService;
+  let notificationService: NotificationService;
   let fixture: ComponentFixture<LoginComponent>;
   let router: Router;
   let mockLoginFormComponent: MockLoginFormComponent;
@@ -44,8 +48,10 @@ describe('LoginComponent', () => {
     TestBed.configureTestingModule({
       declarations: [ LoginComponent, MockLoginFormComponent ],
       imports: [ 
+        NoopAnimationsModule,
         HttpClientTestingModule,
-        RouterTestingModule
+        RouterTestingModule,
+        ToastrModule.forRoot(),
       ]
     })
     .compileComponents();
@@ -55,18 +61,40 @@ describe('LoginComponent', () => {
     fixture = TestBed.createComponent(LoginComponent);
     component = fixture.componentInstance;
     authService = fixture.debugElement.injector.get(AuthService);
+    notificationService = fixture.debugElement.injector.get(NotificationService);
     router = fixture.debugElement.injector.get(Router);
     mockLoginFormComponent = fixture.debugElement.query(By.directive(MockLoginFormComponent)).componentInstance;
+
+    fixture.detectChanges();
   });
 
-  it('should create', () => {
-    expect(component).toBeTruthy();
+  it('should not process invalid form', () => {
+    //
+    const formData: IFormSubmit<ILogin> = {
+      errors: [
+        {control: 'username', error: 'required', value: '', meta: true},
+        {control: 'password', error: 'required', value: '', meta: true},
+      ],
+      values: {
+        username: '',
+        password: ''
+      },
+      valid: false
+    }
+    const spy = spyOn(notificationService, 'notifyFormErrors').and.callFake(() => {});
+    
+    mockLoginFormComponent.eeFormSubmit.emit(formData);
+
+    const expected = [
+      {control: 'username', error: 'required', value: '', meta: true},
+      {control: 'password', error: 'required', value: '', meta: true},
+    ];
+
+    expect(spy).toHaveBeenCalledWith(expected);
   });
 
   it('Should process successful login', () => {
     //
-    fixture.detectChanges();
-
     const mockResponse: IResponse<ICredentials> = {
       data: {
         'token': 'xeer.eawe.ee',
@@ -90,22 +118,10 @@ describe('LoginComponent', () => {
       valid: true
     }
     
-    mockLoginFormComponent.loginFormSubmit.emit(formData)
+    mockLoginFormComponent.eeFormSubmit.emit(formData)
     
     expect(spyLogin).toHaveBeenCalledWith(formData.values);
     expect(spyRouter).toHaveBeenCalledWith(['/home']);
-    
   });
-
-  it('Should redirect if user is authenticated', () => {
-    //
-    const spyGetAuthorizedUser = spyOn(authService, 'getAuthorizedUser').and.callFake(() => false);
-    const spyGetRouterNavigate = spyOn(router, 'navigate');
-
-    fixture.detectChanges();
-
-    expect(spyGetAuthorizedUser).toHaveBeenCalled();
-    expect(spyGetRouterNavigate).toHaveBeenCalledWith(['/']);
-  })
 
 });

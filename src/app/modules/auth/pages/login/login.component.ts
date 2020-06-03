@@ -3,6 +3,7 @@ import { IFormSubmit } from '@core/interfaces/form-submit.interface';
 import { AuthService } from '@core/auth/auth.service';
 import { Router } from '@angular/router';
 import { ILogin } from '../../interfaces/login.interface';
+import { NotificationService } from '@core/services/notification.service';
 
 
 
@@ -14,25 +15,17 @@ import { ILogin } from '../../interfaces/login.interface';
 export class LoginComponent implements OnInit {
 
   constructor(
-    private _router: Router,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _notificationService: NotificationService,
+    private _router: Router
   ) { }
 
-  ngOnInit(): void {
-    this.redirectIfAuthenticated();
-  }
-
-  redirectIfAuthenticated() {
-    //
-    if (!this._authService.getAuthorizedUser()) {
-      //
-      this._router.navigate(['/']);
-    }
-  }
+  ngOnInit(): void {}
 
   doLogin(formData: IFormSubmit<ILogin>) {
     //
     if (!formData.valid) {
+      this._notificationService.notifyFormErrors(formData.errors);
       return;
     }
 
