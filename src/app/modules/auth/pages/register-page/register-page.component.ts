@@ -3,11 +3,11 @@ import { IFormSubmit } from '@core/interfaces/form-submit.interface';
 import { IRegister } from '../../interfaces/register.interface';
 
 @Component({
-  selector: 'app-register',
-  templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  selector: 'app-register-page',
+  templateUrl: './register-page.component.html',
+  styleUrls: ['./register-page.component.css']
 })
-export class RegisterComponent implements OnInit {
+export class RegisterPageComponent implements OnInit {
 
   constructor() { }
 

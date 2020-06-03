@@ -5,14 +5,12 @@ import { Router } from '@angular/router';
 import { ILogin } from '../../interfaces/login.interface';
 import { NotificationService } from '@core/services/notification.service';
 
-
-
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-login-page',
+  templateUrl: './login-page.component.html',
+  styleUrls: ['./login-page.component.css']
 })
-export class LoginComponent implements OnInit {
+export class LoginPageComponent implements OnInit {
 
   constructor(
     private _authService: AuthService,

@@ -1,6 +1,6 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LoginComponent } from './login.component';
+import { LoginPageComponent } from './login-page.component';
 import { AuthService } from '@core/auth/auth.service';
 import { IFormSubmit } from '@core/interfaces/form-submit.interface';
 import { ICredentials } from '@core/interfaces/auth.interface';
@@ -23,7 +23,7 @@ import { NoopAnimationsModule } from '@angular/platform-browser/animations';
  * it is important to note the selector being used,
  * it should match the child component selector we are mocking
  * 
- * the parent component `LoginComponent` listens for the `eeFormSubmit` event
+ * the parent component `LoginPageComponent` listens for the `eeFormSubmit` event
  * from the child component `LoginFormComponent` <app-login-form> 
  * this triggers the `doLogin` function of the parent component
  * hence, we need to implement the `eeFormSubmit` emitter on our mock
@@ -36,17 +36,17 @@ class MockLoginFormComponent {
   @Output() eeFormSubmit: EventEmitter<IFormSubmit<ILogin>> = new EventEmitter();
 }
 
-describe('LoginComponent', () => {
-  let component: LoginComponent;
+describe('LoginPageComponent', () => {
+  let component: LoginPageComponent;
   let authService: AuthService;
   let notificationService: NotificationService;
-  let fixture: ComponentFixture<LoginComponent>;
+  let fixture: ComponentFixture<LoginPageComponent>;
   let router: Router;
   let mockLoginFormComponent: MockLoginFormComponent;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginComponent, MockLoginFormComponent ],
+      declarations: [ LoginPageComponent, MockLoginFormComponent ],
       imports: [ 
         NoopAnimationsModule,
         HttpClientTestingModule,
@@ -58,7 +58,7 @@ describe('LoginComponent', () => {
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoginComponent);
+    fixture = TestBed.createComponent(LoginPageComponent);
     component = fixture.componentInstance;
     authService = fixture.debugElement.injector.get(AuthService);
     notificationService = fixture.debugElement.injector.get(NotificationService);
