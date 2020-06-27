@@ -16,12 +16,13 @@ export class GuestGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
+    //
     if (this._authService.getAuthorizedUser()) {
       this._router.navigate(['/']);
-      return true;
+      return false;
     }
 
-    return false;
+    return true;
   }
   
 }

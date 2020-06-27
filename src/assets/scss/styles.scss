@@ -1,15 +1,22 @@
-@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 @import "~node_modules/bootstrap/scss/functions";
 @import "~node_modules/bootstrap/scss/variables";
 @import "~node_modules/bootstrap/scss/mixins";
 
-@import "~node_modules/bootstrap/scss/grid";
+@import "node_modules/bootstrap/scss/reboot";
+@import "node_modules/bootstrap/scss/card";
+@import "node_modules/bootstrap/scss/utilities";
+@import "node_modules/bootstrap/scss/grid";
 
-@import '~ngx-toastr/toastr';
+@import 'node_modules/ngx-toastr/toastr-bs4-alert';
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
+@import 'src/app/core/libs/button-loader/button-loader';
 
-$bg-color: $gray-100;
-body {
-    background: $bg-color;
+mat-form-field {
+  width: 100%;
+}
+// Remove button outline from bootstrap-reboot
+button:focus {
+  outline:none;
 }

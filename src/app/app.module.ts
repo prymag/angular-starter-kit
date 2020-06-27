@@ -4,6 +4,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { HomeModule } from './modules/home/home.module';
+import { CoreModule } from '@core/core.module';
 
 @NgModule({
   declarations: [
@@ -11,6 +12,7 @@ import { HomeModule } from './modules/home/home.module';
   ],
   imports: [
     BrowserModule,
+    CoreModule,
     HomeModule,
     AuthModule,
     AppRoutingModule

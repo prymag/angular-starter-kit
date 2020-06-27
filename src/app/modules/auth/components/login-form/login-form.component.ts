@@ -15,7 +15,6 @@ import { BaseFormComponent } from '@core/base-components/base-form/base-form.com
 export class LoginFormComponent extends BaseFormComponent {
 
   theForm: FormGroup;
-
   formValues$ = new Subject<ILogin>();
 
   @Output() eeFormSubmit: EventEmitter<IFormSubmit<ILogin>> = new EventEmitter();

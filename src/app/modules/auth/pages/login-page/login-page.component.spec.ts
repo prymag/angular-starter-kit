@@ -124,4 +124,34 @@ describe('LoginPageComponent', () => {
     expect(spyRouter).toHaveBeenCalledWith(['/home']);
   });
 
+  it('should notify if user not found', () =>{
+    //
+
+    const mockResponse: IResponse<any> = {
+      success: false,
+      message: 'User not found',
+      data: {
+        success: false,
+        message: "User not found",
+        data: { 
+          eType: "notFound",
+          eDetail: "userNotFound"
+        }
+      }
+    }
+    const spyLogin = spyOn(authService, 'login').and.callFake(() => of(mockResponse));
+    
+    const formData: IFormSubmit<ILogin> = {
+      errors: [],
+      values: {
+        username: 'arci.munoz',
+        password: 'ramonathornes'
+      },
+      valid: true
+    }
+    
+    mockLoginFormComponent.eeFormSubmit.emit(formData)
+
+  });
+
 });
