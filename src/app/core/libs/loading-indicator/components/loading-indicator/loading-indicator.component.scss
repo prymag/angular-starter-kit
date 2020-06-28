@@ -1,0 +1,59 @@
+.indicator {
+  position: absolute;
+  top:-999px;
+  left:0;
+  right:0;
+  margin: auto;
+  border-radius: 50%;
+  -webkit-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.5);
+  -moz-box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.5);
+  box-shadow: 1px 1px 10px 0px rgba(0,0,0,0.5);
+  z-index: 9999999;
+
+  .spinner,
+  .spinner:after {
+    border-radius: 50%;
+    width: 60%;
+    height: 60%;
+  }
+  .spinner {
+    position: absolute;
+    top:0;
+    bottom:0;
+    right:0;
+    left:0;
+    margin:auto;
+    font-size: 10px;
+    text-indent: -9999em;
+    border-top-style: solid;
+    border-right-style: solid;
+    border-bottom-style: solid;
+    border-left-style: solid;
+    -webkit-transform: translateZ(0);
+    -ms-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-animation: spin .5s infinite linear;
+    animation: spin .5s infinite linear;
+  }
+  @-webkit-keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+  @keyframes spin {
+    0% {
+      -webkit-transform: rotate(0deg);
+      transform: rotate(0deg);
+    }
+    100% {
+      -webkit-transform: rotate(360deg);
+      transform: rotate(360deg);
+    }
+  }
+
+}
