@@ -5,6 +5,8 @@ import { AppRoutingModule } from './app-routing.module';
 import { AuthModule } from './modules/auth/auth.module';
 import { HomeModule } from './modules/home/home.module';
 import { CoreModule } from '@core/core.module';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ToggleLoadingIndicatorInterceptor } from '@core/libs/loading-indicator/interceptors/toggle-loading-indicator.interceptor';
 
 @NgModule({
   declarations: [
@@ -17,7 +19,13 @@ import { CoreModule } from '@core/core.module';
     AuthModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ToggleLoadingIndicatorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
