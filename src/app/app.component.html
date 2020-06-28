@@ -1,5 +1,12 @@
-<router-outlet></router-outlet>
-<div class="container">
-    <div class="col-md-12">Testing what is this</div>
+<app-loading-indicator [color]="'#673ab7'"></app-loading-indicator>
 
-</div>
+<ng-container *ngIf=" layout == 'empty' ">
+  <router-outlet></router-outlet>
+</ng-container>
+
+<ng-container *ngIf=" layout == 'default' ">
+  Header
+  <router-outlet></router-outlet>
+  footer
+</ng-container>
+

@@ -9,6 +9,7 @@ import { RouterModule } from '@angular/router';
 import { ToastrModule } from 'ngx-toastr';
 import { BaseFormComponent } from './base-components/base-form/base-form.component';
 import { ButtonLoaderModule } from './libs/button-loader/button-loader.module';
+import { LoadingIndicatorModule } from './libs/loading-indicator/loading-indicator.module';
 
 @NgModule({
   declarations: [BaseFormComponent],
@@ -18,6 +19,7 @@ import { ButtonLoaderModule } from './libs/button-loader/button-loader.module';
     ButtonLoaderModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
+    LoadingIndicatorModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
@@ -28,6 +30,7 @@ import { ButtonLoaderModule } from './libs/button-loader/button-loader.module';
     BrowserAnimationsModule,
     ButtonLoaderModule,
     ReactiveFormsModule,
+    LoadingIndicatorModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
