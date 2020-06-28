@@ -10,11 +10,11 @@ export class ButtonLoaderService {
 
   }
 
-  showLoading() {
+  show() {
     this.showLoading$.next(true);
   }
 
-  hideLoading() {
+  hide() {
     this.showLoading$.next(false);
   }
 

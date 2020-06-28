@@ -15,8 +15,8 @@ export class LoginPageComponent implements OnInit {
 
   constructor(
     private _authService: AuthService,
-    private _notificationService: NotificationService,
     private _btnLoaderService: ButtonLoaderService,
+    private _notificationService: NotificationService,
     private _router: Router
   ) { }
 
@@ -24,10 +24,11 @@ export class LoginPageComponent implements OnInit {
 
   doLogin(formData: IFormSubmit<ILogin>) {
     //
-    this._btnLoaderService.showLoading();
+    this._btnLoaderService.show();
     
     if (!formData.valid) {
       this._notificationService.notifyFormErrors(formData.errors);
+      this._btnLoaderService.hide();
       return;
     }
 
@@ -38,11 +39,11 @@ export class LoginPageComponent implements OnInit {
         if (response.success) {
           this._router.navigate(['/home'])
         }
-        this._btnLoaderService.hideLoading();
+        this._btnLoaderService.hide();
       }, fail => {
         //
         this._notificationService.notifyError(fail);
-        this._btnLoaderService.hideLoading();
+        this._btnLoaderService.hide();
       })
   }
 
